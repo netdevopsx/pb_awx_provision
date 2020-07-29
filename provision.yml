@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: "awx_provision"
+    awx_provision:
+      configuration: "{{ ansible_tower }}"
+    register: results
+
+    - name: "Show results"
+      debug:
+        msg: "{{ results }}"

@@ -1,0 +1,4 @@
+---
+collections:
+- name: generalovmaksim.awx
+  version: 1.0.0
