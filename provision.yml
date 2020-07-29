@@ -4,10 +4,10 @@
   connection: local
   tasks:
   - name: "awx_provision"
-    awx_provision:
+    generalovmaksim.awx.awx_provision:
       configuration: "{{ ansible_tower }}"
     register: results
 
-    - name: "Show results"
-      debug:
-        msg: "{{ results }}"
+  - name: "Show results"
+    debug:
+      msg: "{{ results }}"
