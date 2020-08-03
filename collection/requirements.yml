@@ -1,4 +1,4 @@
 ---
 collections:
-- name: generalovmaksim.awx
-  version: 1.0.2
+- name: netdevopsx.awx
+  version: 1.0.0
