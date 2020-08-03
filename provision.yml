@@ -4,7 +4,7 @@
   connection: local
   tasks:
   - name: "awx_provision"
-    generalovmaksim.awx.awx_provision:
+    netdevopsx.awx.awx_provision:
       configuration: "{{ ansible_tower }}"
     register: results
 
