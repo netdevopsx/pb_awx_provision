@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+      kubernetes.io/ingress.class: nginx
+  name: awx-{{item.env}}-web-svc
+  namespace: awx-{{item.env}}
+spec:
+  rules:
+{% if item.production %}
+  - host: "awx.{{ domain }}"
+    http:
+      paths:
+      - backend:
+          serviceName: awx-{{item.env}}-web-svc
+          servicePort: http
+        path: /
+{% endif %}
+  - host: "awx.{{item.env}}.{{ domain }}"
+    http:
+      paths:
+      - backend:
+          serviceName: awx-{{item.env}}-web-svc
+          servicePort: http
+        path: /
+  tls:
+  - hosts:
+{% if item.production %}
+    - awx.{{ domain }}
+{% endif %}
+    - awx.{{item.env}}.{{ domain }}
+    secretName: awx-cert

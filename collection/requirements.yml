@@ -2,3 +2,5 @@
 collections:
 - name: netdevopsx.awx
   version: 1.0.0
+- name: community.kubernetes
+  version: 1.0.0

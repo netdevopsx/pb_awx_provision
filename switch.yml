@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: "Checking mandatory variables"
+    assert:
+      that:
+        - production is defined
+        - domain is defined
+      success_msg: "Mandatory variables are OK"
+      fail_msg: "Mandatory variables was not provided, please provide production name and domain"
+  - name: "awx_switch"
+    community.kubernetes.k8s:
+      api_version: v1
+      state: present
+      definition: "{{ lookup('template','ingress.j2') }}"
+      namespace: awx-{{ item.env }}
+    loop:
+    - env: "blue"
+      production: "{{ True if production == 'blue' else False }}"
+    - env: "green"
+      production: "{{ True if production == 'green' else False }}"
+    loop_control:
+      label: "{{ item.env }} {{ 'production' if item.production else 'staging' }}"
